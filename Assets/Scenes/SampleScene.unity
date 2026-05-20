@@ -1193,7 +1193,7 @@ GameObject:
   - component: {fileID: 2023636579}
   - component: {fileID: 2023636578}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: GroundTile3d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
