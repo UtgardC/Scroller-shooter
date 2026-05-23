@@ -27,6 +27,14 @@ public class ContactDamage3D : MonoBehaviour
             return;
         }
 
+        PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
+
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(damage);
+            return;
+        }
+
         Health health = other.GetComponentInParent<Health>();
 
         if (health != null)

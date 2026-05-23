@@ -7,6 +7,7 @@ public class Projectile3D : MonoBehaviour
     [SerializeField] private int damage = 1;
     [SerializeField] private float lifeTime = 3f;
     [SerializeField] private LayerMask hitMask = ~0;
+    [SerializeField] private TrailRenderer trail;
 
     private Poolable poolable;
     private Vector3 moveDirection = Vector3.forward;
@@ -15,12 +16,19 @@ public class Projectile3D : MonoBehaviour
     private void Awake()
     {
         poolable = GetComponent<Poolable>();
+
+        if (trail == null)
+        {
+            trail = GetComponentInChildren<TrailRenderer>();
+        }
+
         EnsureTriggerCollider();
     }
 
     private void OnEnable()
     {
         despawnTime = Time.time + lifeTime;
+        ResetTrail();
     }
 
     private void OnValidate()
@@ -55,13 +63,25 @@ public class Projectile3D : MonoBehaviour
             return;
         }
 
+        PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
+
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(damage);
+            ReturnToPool();
+            return;
+        }
+
         Health health = other.GetComponentInParent<Health>();
 
         if (health != null)
         {
             health.TakeDamage(damage);
+            ReturnToPool();
+            return;
         }
 
+        other.SendMessageUpwards("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
         ReturnToPool();
     }
 
@@ -83,6 +103,8 @@ public class Projectile3D : MonoBehaviour
 
     private void ReturnToPool()
     {
+        StopTrail();
+
         if (poolable == null)
         {
             poolable = GetComponent<Poolable>();
@@ -95,5 +117,29 @@ public class Projectile3D : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+    }
+
+    private void ResetTrail()
+    {
+        if (trail == null)
+        {
+            return;
+        }
+
+        trail.enabled = true;
+        trail.Clear();
+        trail.emitting = true;
+    }
+
+    private void StopTrail()
+    {
+        if (trail == null)
+        {
+            return;
+        }
+
+        trail.emitting = false;
+        trail.Clear();
+        trail.enabled = false;
     }
 }

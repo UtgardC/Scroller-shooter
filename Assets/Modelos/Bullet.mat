@@ -100,7 +100,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EmissionRainbow: 1
+    - _EmissionRainbow: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 1
@@ -108,13 +108,13 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity_of_rainbow: 1
+    - _Opacity_of_rainbow: 0.64
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Size: 2
-    - _Smooth: 0.5
+    - _Size: 1
+    - _Smooth: 0
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -128,7 +128,7 @@ Material:
     - _metalic: 0
     m_Colors:
     - _BaseColor: {r: 0.6859057, g: 0.90635544, b: 0.64021873, a: 1}
-    - _Color: {r: 0.7066493, g: 0.89199996, b: 0.88813853, a: 1}
+    - _Color: {r: 1, g: 0, b: 0.2339369, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

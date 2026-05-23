@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 1;
+    [SerializeField] private UnityEvent onHit = new UnityEvent();
     [SerializeField] private UnityEvent onDeath = new UnityEvent();
     [SerializeField] private bool destroyOnDeath = true;
 
@@ -32,6 +33,7 @@ public class Health : MonoBehaviour
         }
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
+        onHit?.Invoke();
 
         if (currentHealth <= 0)
         {
